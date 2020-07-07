@@ -2,10 +2,7 @@
   <div class="about">
     <h2>{{headTitle}}</h2>
     <p>{{paragraph}}</p>
-    <div class="developer">
-      <developer/>
-      <developer/>
-    </div>
+    <developer/>
   </div>
 </template>
 
@@ -21,14 +18,13 @@ export default {
     developer
   },
   methods: {
-    ...mapActions(["fetchHeadTitle", "fetchParagraph"])
+    ...mapActions(["fetchAbout"])
   },
   computed: {
     ...mapGetters(["headTitle","paragraph"])
   },
   created(){
-    this.fetchHeadTitle();
-    this.fetchParagraph();
+    this.fetchAbout();
   }
 }
 </script>
@@ -46,19 +42,10 @@ export default {
     margin: auto;
     text-align: center;
   }
-  .developer{
-    display: block;
-  }
   h2{
     margin: 20px 0;
   }
   p{
     margin: 40px 0;
-  }
-
-  @media(max-width:920px){
-    .developer > *{
-      margin-bottom: 20px;
-    }
   }
 </style>

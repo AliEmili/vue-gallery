@@ -1,18 +1,33 @@
 <template>    
-    <div class="cards">
-        <img src="" alt="pic">
-        <h5>{{devName}}</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, dolorum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, incidunt. Lorem, ipsum dolor.</p>
+    <div class="developer">
+        <div class="cards" v-for="developer in developers" :key="developer.id">
+            <img :src=developer.url alt="pic">
+            <h5>{{developer.title | substring}}</h5>
+            <p>{{developer.title | repeat}}</p>
+        </div>
     </div>
 </template>
 
 
 <script>
+import {mapGetters, mapActions} from "vuex";
 export default {
     name: "developer",
-    data(){
-        return{
-            devName: "lorem1"
+    methods: {
+        ...mapActions(["fetchDeveloper"])
+    },
+    computed: {
+        ...mapGetters(["developers"])
+    },
+    created(){
+        this.fetchDeveloper();
+    },
+    filters: {
+        substring(val){
+            return val.substring(0,3);
+        },
+        repeat(val){
+            return val.repeat(10);
         }
     }
 }
@@ -27,5 +42,24 @@ export default {
         padding: 5px 15px;
         border-radius: 10px;
         text-align: right;
+    }
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+    h5, p{
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width:800px){
+        .cards {
+            text-align: center;
+        }
+        p{
+           margin: 5px; 
+        }
     }
 </style>

@@ -11,18 +11,12 @@ const getters = {
 };
 
 const actions = {
-    async fetchHeadTitle({ commit }) {
+    async fetchAbout({ commit }) {
         const response = await axios.get(
             "https://jsonplaceholder.typicode.com/photos"
         );
 
         commit("setHeadTitle", response.data[0].title.substring(0, 6));
-    },
-    async fetchParagraph({ commit }) {
-        const response = await axios.get(
-            "https://jsonplaceholder.typicode.com/photos"
-        );
-
         commit("setParagraph", response.data[0].title);
     }
 }
