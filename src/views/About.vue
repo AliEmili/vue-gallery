@@ -14,25 +14,21 @@
 
 <script>
 import developer from "@/components/developer";
-import axios from 'axios';
+import {mapGetters, mapActions} from "vuex";
 export default {
   name: "About",
-  data(){
-    return{
-      headTitle: "",
-      paragraph: ""
-    }
-  },
   components: {
     developer
   },
+  methods: {
+    ...mapActions(["fetchHeadTitle", "fetchParagraph"])
+  },
+  computed: {
+    ...mapGetters(["headTitle","paragraph"])
+  },
   created(){
-    axios.get('https://jsonplaceholder.typicode.com/photos')
-    .then(res=> {
-      this.headTitle = res.data[0].title.substring(0,6);
-      this.paragraph = res.data[0].title;
-    })
-    .catch(err => console.log(err));
+    this.fetchHeadTitle();
+    this.fetchParagraph();
   }
 }
 </script>
