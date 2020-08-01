@@ -43,7 +43,7 @@ export default {
     text-align: center;
   }
   h2{
-    margin: 20px 0;
+    padding-top: 20px !important;
   }
   p{
     margin: 40px 0;

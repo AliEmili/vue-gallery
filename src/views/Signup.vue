@@ -1,15 +1,15 @@
 <template>
   <section class="slider">
-    <description/>
+    <signupForm />
   </section>
 </template>
 
 <script>
-import description from "@/components/description.vue";
+import signupForm from "@/components/signupForm.vue";
 export default {
-  name: "Home",
+  name: "Signup",
   components: {
-    description
+    signupForm
   }
 };
 </script>
@@ -20,6 +20,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     height: 687px;
+    display: grid;
   }
   @media (max-width: 720px) {
     .slider {

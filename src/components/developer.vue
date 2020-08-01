@@ -58,7 +58,7 @@ export default {
         .cards {
             text-align: center;
         }
-        p{
+        p, h5{
            margin: 5px; 
         }
     }

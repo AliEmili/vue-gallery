@@ -1,24 +1,24 @@
 import axios from "axios";
 
 const state = {
-    developers: []
+    photos: []
 };
 
 const getters = {
-    developers: state => state.developers
+    photos: state => state.photos
 }
 
 const mutations = {
-    setDeveloper: (state, developers) => state.developers = developers
+    setPhotos: (state, photos) => state.photos = photos
 }
 
 const actions = {
-    async fetchDeveloper({ commit }) {
+    async fetchPhotos({ commit }) {
         try {
             const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos?_limit=2"
+                "https://jsonplaceholder.typicode.com/photos?_limit=16"
             );
-            commit("setDeveloper", response.data);
+            commit("setPhotos", response.data);
         } catch (err) {
             console.log(err);
         }

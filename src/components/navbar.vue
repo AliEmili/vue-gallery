@@ -4,10 +4,10 @@
             <nav class="teal">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="/home" class="brand-logo pinks">گردشگریاتو</a>
+                        <a href="/" class="brand-logo pinks">گردشگریاتو</a>
                         <ul class="right">
                             <li>
-                                <router-link to="/home">خانه</router-link>
+                                <router-link to="/">خانه</router-link>
                             </li>
                             <li>
                                 <router-link to="/gallery">گالری</router-link>

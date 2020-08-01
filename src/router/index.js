@@ -24,6 +24,27 @@ const routes = [{
             import ("../views/PageNotFound.vue")
     },
     {
+        path: "/signup",
+        component: () =>
+            import ("../views/Signup.vue")
+    },
+    {
+        path: "/login",
+        component: () =>
+            import ("../views/Login.vue")
+    },
+    {
+        path: "/gallery",
+        component: () =>
+            import ("../views/Gallery.vue")
+    },
+    {
+        path: "/gallery/:nth",
+        component: () =>
+            import ("../views/Photo.vue"),
+        props: true
+    },
+    {
         path: "*",
         redirect: "/404"
     }

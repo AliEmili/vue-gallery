@@ -5,5 +5,6 @@
 <style scoped>
     h1{
         text-align: center;
+        margin: 309px 0;
     }
 </style>
