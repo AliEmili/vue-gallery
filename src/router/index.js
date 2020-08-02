@@ -45,6 +45,11 @@ const routes = [{
         props: true
     },
     {
+        path: "/addPhoto",
+        component: () =>
+            import ("../views/addPhoto.vue")
+    },
+    {
         path: "*",
         redirect: "/404"
     }

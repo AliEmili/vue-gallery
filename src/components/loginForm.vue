@@ -7,9 +7,6 @@
           <div class="input-field" id="password">
             <input placeholder="رمز عبور" type="password" class="validate">
         </div>
-        <p>
-            <input type="checkbox" id="remember"/>
-        </p>
         <a class="waves-effect waves-light btn btn-large" id="loginbtn">ورود</a>
     </form>
 </template>

@@ -2,6 +2,7 @@
     <div class="container center">
         <h2 class="gallery-header">گالری</h2>
         <card />
+        <a href="/addphoto" class="waves-effect waves-light btn btn-large" id="addPhoto">افزودن تصویر</a>
     </div>
 </template>
 
@@ -17,5 +18,8 @@ export default {
 <style scoped>
     .gallery-header{
         padding: 20px !important;
+    }
+    #addPhoto {
+        margin: 20px 0;
     }
 </style>

@@ -22,6 +22,7 @@ export default {
 *{
   box-sizing: border-box !important;
   direction: rtl !important;
+  outline: none;
 }
 h1,h2,h3,h4,h5 {
   margin: 0 !important;
