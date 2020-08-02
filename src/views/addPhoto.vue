@@ -38,9 +38,6 @@ export default {
         direction: ltr !important;
         margin-bottom: 10px;
     }
-    a{
-        justify-content: center;
-    }
     input,
     input::placeholder {
         padding: 10px;
