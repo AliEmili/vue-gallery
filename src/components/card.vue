@@ -34,6 +34,9 @@ export default {
     .card {
         margin: 0;
     }
+    .card:hover {
+        transform: scale(1.05);
+    }
     .photos{
         width: 90%;
         margin: 10px auto;

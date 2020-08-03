@@ -17,7 +17,7 @@
                 <textarea placeholder="نظر" name="comment" id="comment"></textarea>
                 <br>
                 <a class="waves-effect waves-light btn btn-large" id="comment-submit">ثبت نظر</a>
-                <a class="waves-effect waves-light btn btn-large" id="see-comments">مشاهده نظرات</a>
+                <a @click="goToComments(nth)" class="waves-effect waves-light btn btn-large" id="see-comments">مشاهده نظرات</a>
             </form>
         </div>
     </div>
@@ -38,9 +38,10 @@ export default {
         ...mapActions(["fetchPicUrl"]),
         setRating: function(rating){
             this.rating = rating
-            console.log(this.rating);
+        },
+        goToComments: function(nth){
+            this.$router.push(`${nth}/comments`);
         }
-        
     },
     created(){
         this.fetchPicUrl(this.nth)
