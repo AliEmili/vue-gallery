@@ -13,10 +13,10 @@
             </div>
             <h5>برای این عکس نظری بنویسید :</h5>
             <form>
-                <input type="text" placeholder="نام">
-                <textarea placeholder="نظر" name="comment" id="comment"></textarea>
+                <input type="text" v-model="name" placeholder="نام">
+                <textarea placeholder="نظر" v-model="commented" name="comment" id="comment"></textarea>
                 <br>
-                <a class="waves-effect waves-light btn btn-large" id="comment-submit">ثبت نظر</a>
+                <a @click="addComment" class="waves-effect waves-light btn btn-large" id="comment-submit">ثبت نظر</a>
                 <a @click="goToComments(nth)" class="waves-effect waves-light btn btn-large" id="see-comments">مشاهده نظرات</a>
             </form>
         </div>
@@ -31,15 +31,25 @@ export default {
     data(){
         return{
             rating: 0,
-            avgRating: 0.5
+            avgRating: 0.5,
+            name: "",
+            commented: ""
         }
     },
     methods: {
-        ...mapActions(["fetchPicUrl"]),
+        ...mapActions(["fetchPicUrl","addToComment"]),
         setRating: function(rating){
             this.rating = rating
         },
         goToComments: function(nth){
+            this.$router.push(`${nth}/comments`);
+        },
+        addComment: function(nth){
+            let objid = this.nth
+            let objname = this.name;
+            let objcomment = this.commented;
+            let obj = {id: objid, name: objname,comment: objcomment}
+            this.addToComment(obj);
             this.$router.push(`${nth}/comments`);
         }
     },

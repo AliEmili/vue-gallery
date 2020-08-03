@@ -33,6 +33,7 @@ export default {
     }
     .card {
         margin: 0;
+        border-radius: 10px;
     }
     .card:hover {
         transform: scale(1.05);

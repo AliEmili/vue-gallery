@@ -5,6 +5,7 @@ import developer from "./modules/developer";
 import description from "./modules/description";
 import gallery from './modules/gallery';
 import photo from "./modules/photo";
+import comments from "./modules/comments"
 Vue.use(Vuex);
 
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         developer,
         description,
         gallery,
-        photo
+        photo,
+        comments
     }
 });

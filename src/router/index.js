@@ -54,12 +54,11 @@ const routes = [{
         component: () =>
             import ("../views/Comment.vue"),
         props: true
+    },
+    {
+        path: "*",
+        redirect: "/404"
     }
-    // },
-    // {
-    //     path: "*",
-    //     redirect: "/404"
-    // }
 ];
 
 const router = new VueRouter({
