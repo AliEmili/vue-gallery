@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="navbar-fixed">
-            <nav class="teal">
+            <nav class="indigo">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="/" class="brand-logo pinks">گردشگریاتو</a>
+                        <a href="/" class="brand-logo text-white">گردشگریاتو</a>
                         <ul class="right">
                             <li>
                                 <router-link to="/">خانه</router-link>

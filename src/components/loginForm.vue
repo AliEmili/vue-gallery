@@ -1,5 +1,5 @@
 <template>
-    <form class="teal">
+    <form class="indigo">
         <h5 id="title">ورود</h5>
         <div class="input-field" id="username">
               <input placeholder="نام کاربری" type="text" class="validate">
@@ -20,7 +20,7 @@ export default {
 <style scoped>
     form {
         padding: 20px;
-        width: 80%;
+        width: 30%;
         margin: auto;
     }
     input::placeholder {
@@ -32,5 +32,8 @@ export default {
         font-weight: bolder;
         color: white;
         opacity: 0.9;
+    }
+    a:hover {
+        transform: scale(1.1);
     }
 </style>

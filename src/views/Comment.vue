@@ -47,9 +47,9 @@ export default {
         width: 100%;
         border-radius: 20px;
     }
-    div {
+    /* div {
         text-align: center;
-    }
+    } */
     h3 {
         padding: 20px 0;
     }

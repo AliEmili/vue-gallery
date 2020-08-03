@@ -38,7 +38,11 @@ span {
     text-transform: capitalize;
 }
 a{
-  opacity: 0.9 !important;
+  /* opacity: 0.9 !important; */
+  background-color: #3f51b5 !important;
   border-radius: 6px !important;
+}
+a:hover {
+  opacity: 0.8;
 }
 </style>
