@@ -4,7 +4,7 @@
             <nav class="indigo">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a href="/" class="brand-logo text-white">گردشگریاتو</a>
+                        <router-link to="/" class="brand-logo text-white">گردشگریاتو</router-link>
                         <ul class="right">
                             <li>
                                 <router-link to="/">خانه</router-link>
