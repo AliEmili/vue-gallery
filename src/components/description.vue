@@ -2,8 +2,8 @@
     <div class="caption pinks center-align">
         <h2>{{mainTitle}}</h2>
         <h5 class="grey-text text-lighten-3 hide-on-small-only">{{mainParagraph}}</h5>
-        <a href="/signup" class="btn btn-large">ثبت نام</a>
-        <a href="/login" class="btn btn-large">ورود</a>
+        <router-link to="/signup" class="btn btn-large">ثبت نام</router-link>
+        <router-link to="/login" class="btn btn-large">ورود</router-link>
     </div>
 </template>
 

@@ -3,7 +3,7 @@
         <h2 class="gallery-header">گالری</h2>
         <label>(برای مشاهده جزئیات روی عکس کلیک کنید)</label>
         <card />
-        <a href="/addphoto" class="waves-effect waves-light btn btn-large" id="addPhoto">افزودن تصویر</a>
+        <router-link to="/addphoto" class="waves-effect waves-light btn btn-large" id="addPhoto">افزودن تصویر</router-link>
     </div>
 </template>
 
