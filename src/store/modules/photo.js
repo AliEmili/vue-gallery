@@ -9,7 +9,8 @@ const getters = {
 }
 
 const mutations = {
-    setPicUrl: (state, picUrl) => state.picUrl = picUrl
+    setPicUrl: (state, picUrl) => state.picUrl = picUrl,
+    clearUrl: (state, picUrl) => state.picUrl = picUrl
 }
 
 const actions = {
@@ -19,6 +20,14 @@ const actions = {
                 `https://jsonplaceholder.typicode.com/photos/${picId}`
             );
             commit("setPicUrl", response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async clearPicUrl({ commit }) {
+        try {
+            const empty = [];
+            commit("clearUrl", empty);
         } catch (err) {
             console.log(err);
         }

@@ -37,7 +37,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["fetchPicUrl","addToComment"]),
+        ...mapActions(["fetchPicUrl","addToComment", "clearPicUrl"]),
         setRating: function(rating){
             this.rating = rating
         },
@@ -58,6 +58,9 @@ export default {
     },
     computed: {
         ...mapGetters(["picUrl"])
+    },
+    destroyed(){
+        this.clearPicUrl()
     }
 }
 </script>
