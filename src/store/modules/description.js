@@ -14,11 +14,10 @@ const actions = {
     async fetchHome({ commit }) {
         try {
             const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos"
+                "http://localhost:8080/"
             );
-
-            commit("setMainTitle", response.data[0].title.substring(0, 6));
-            commit("setMainParagraph", response.data[0].title);
+            console.log(response.data);
+            commit("setHome", response.data[0]);
         } catch (err) {
             console.log(err);
         }
@@ -26,11 +25,9 @@ const actions = {
 }
 
 const mutations = {
-    setMainTitle: (state, mainTitle) => {
-        state.mainTitle = mainTitle;
-    },
-    setMainParagraph: (state, mainParagraph) => {
-        state.mainParagraph = mainParagraph;
+    setHome: (state, setHome) => {
+        state.mainTitle = setHome.title;
+        state.mainParagraph = setHome.info;
     }
 };
 

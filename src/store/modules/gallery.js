@@ -18,6 +18,7 @@ const actions = {
             const response = await axios.get(
                 "https://jsonplaceholder.typicode.com/photos?_limit=16"
             );
+            console.log(response.data)
             commit("setPhotos", response.data);
         } catch (err) {
             console.log(err);

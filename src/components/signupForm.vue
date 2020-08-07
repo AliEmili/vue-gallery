@@ -2,21 +2,41 @@
     <form class="indigo">
         <h5 id="title">فرم ثبت نام</h5>
         <div class="input-field" id="username">
-              <input placeholder="نام کاربری" name="username" type="text" class="validate">
+              <input placeholder="نام کاربری" v-model="username" name="username" type="text" class="validate">
           </div>
           <div class="input-field" id="password">
-            <input placeholder="رمز عبور" type="password" name="password" class="validate">
+            <input placeholder="رمز عبور" type="password" v-model="password" name="password" class="validate">
         </div>
         <p>
             <input type="checkbox" id="remember"/>
         </p>
-        <a class="waves-effect waves-light btn btn-large" id="loginbtn">ثبت نام</a>
+        <a @click="registerClicked" class="waves-effect waves-light btn btn-large" id="loginbtn">ثبت نام</a>
     </form>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
-    name: "signupForm"
+    name: "signupForm",
+    data() {
+        return{
+            username: "",
+            password: ""
+        }
+    },
+    methods:{
+        ...mapActions(["register"]),
+        registerClicked: function(){
+            let usrobj = this.username;
+            let passubj = this.password;
+            let user = {
+                username: usrobj,
+                password: passubj
+            }
+            this.register(user);
+            this.$router.push("login");
+        }
+    }
 }
 </script>
 
