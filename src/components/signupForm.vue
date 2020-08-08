@@ -29,11 +29,11 @@ export default {
         registerClicked: function(){
             let usrobj = this.username;
             let passubj = this.password;
-            let user = {
+            let userFields = {
                 username: usrobj,
                 password: passubj
             }
-            this.register(user);
+            this.register(userFields);
             this.$router.push("login");
         }
     }

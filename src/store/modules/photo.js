@@ -1,33 +1,33 @@
 import axios from "axios";
 
 const state = {
-    picUrl: []
+    picData: {}
 };
 
 const getters = {
-    picUrl: state => state.picUrl
+    picData: state => state.picData.imagePath
 }
 
 const mutations = {
-    setPicUrl: (state, picUrl) => state.picUrl = picUrl,
-    clearUrl: (state, picUrl) => state.picUrl = picUrl
+    setPicUrl: (state, picUrl) => state.picData = picUrl,
+    clearPic: (state, picData) => state.picData = picData
 }
 
 const actions = {
-    async fetchPicUrl({ commit }, picId) {
+    async fetchPic({ commit }, picId) {
         try {
             const response = await axios.get(
-                `https://jsonplaceholder.typicode.com/photos/${picId}`
+                `//localhost:8080/gallery/${picId}`
             );
-            commit("setPicUrl", response.data);
+            commit("setPic", response.data);
         } catch (err) {
             console.log(err);
         }
     },
-    async clearPicUrl({ commit }) {
+    async clearPic({ commit }) {
         try {
-            const empty = [];
-            commit("clearUrl", empty);
+            const empty = {};
+            commit("clearPic", empty);
         } catch (err) {
             console.log(err);
         }

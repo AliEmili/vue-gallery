@@ -12,7 +12,7 @@ const actions = {
     async fetchComments({ commit }, id) {
         try {
             const response = await axios.get(
-                `https://jsonplaceholder.typicode.com/photos/${id}/comments?_limit=10`
+                `//localhost:8080/gallery/${id}/comments`
             );
             console.log(response.data);
             commit("setComments", response.data);
@@ -22,9 +22,9 @@ const actions = {
     },
     async addToComment({ commit }, payload) {
         try {
-            const response = await axios.post(
-                `https://jsonplaceholder.typicode.com/photos/${payload.id}/comments`, { name: payload.name, email: 'sth', body: payload.comment }
-            )
+            let userInfo = await localStorage.getItem('user');
+            let userToken = await JSON.parse(userInfo).token;
+            const response = await axios.post(`//localhost:8080/gallery/${payload.id}/comments`, { commentText: payload.comment }, { headers: { token: userToken } })
             commit('newComment', response.data);
         } catch (err) {
             console.log(err);

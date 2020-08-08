@@ -8,6 +8,8 @@ import photo from "./modules/photo";
 import comments from "./modules/comments";
 import signup from "./modules/signup";
 import addphoto from "./modules/addPhoto";
+import rate from "./modules/rate";
+import login from "./modules/login";
 
 Vue.use(Vuex);
 
@@ -21,6 +23,8 @@ export default new Vuex.Store({
         photo,
         comments,
         signup,
-        addphoto
+        addphoto,
+        rate,
+        login
     }
 });

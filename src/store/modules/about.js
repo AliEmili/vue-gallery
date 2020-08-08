@@ -14,11 +14,11 @@ const actions = {
     async fetchAbout({ commit }) {
         try {
             const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos"
+                "//localhost:8080/about"
             );
-
-            commit("setHeadTitle", response.data[0].title.substring(0, 6));
-            commit("setParagraph", response.data[0].title);
+            console.log(response.data);
+            commit("setHeadTitle", response.data[0].title);
+            commit("setParagraph", response.data[0].info);
         } catch (err) {
             console.log(err);
         }

@@ -16,7 +16,6 @@ const actions = {
             const response = await axios.get(
                 "http://localhost:8080/"
             );
-            console.log(response.data);
             commit("setHome", response.data[0]);
         } catch (err) {
             console.log(err);

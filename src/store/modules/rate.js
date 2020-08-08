@@ -1,19 +1,19 @@
 import axios from "axios";
 
 const state = {
-    user: {}
+    rate: ""
 };
 
 const getters = {
-    userFields: state => state.user
+    user: state => state.rate
 };
 
 const actions = {
-    async register({ commit }, userFields) {
+    async register({ commit }, post) {
         try {
-            const response = await axios.post("//localhost:8080/signup", userFields);
+            const response = await axios.post(`//localhost:8080/gallery/${post.id}/rate`, { rate: post.rate });
             console.log(response.data);
-            commit('setUser', response.data);
+            commit('setRate', response.data);
         } catch (err) {
             console.log(err);
         }
@@ -21,7 +21,7 @@ const actions = {
 }
 
 const mutations = {
-    setUser: (state, userData) => state.user = userData
+    setRate: (state, rate) => state.rate = rate
 };
 
 export default {

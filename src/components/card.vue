@@ -1,7 +1,7 @@
 <template>
     <div class="photos">
         <div @click="goToPhotoPage(photo.id)" class="card" v-for="photo in photos" v-bind:key="photo.id">
-            <img :src=photo.url alt="pic">
+            <img :src=photo.imagePath alt="pic">
         </div>
     </div>
 </template>

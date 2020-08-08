@@ -2,6 +2,10 @@
     <div class="container">
         <div class="card">
             <img :src=picUrl.url alt="pic">
+            <h5>تیتر عکس :</h5>
+            <p>{{picData.title}}</p>
+            <h5>توضیحات :</h5>
+            <p>{{picData.info}}</p>
             <h5>میانگین امتیاز این تصویر :</h5>
             <div class="rate-div">
                 <star-rating :rtl="true" :rating=avgRating :read-only="true" :increment="0.01"></star-rating>
@@ -13,8 +17,7 @@
             </div>
             <h5>برای این عکس نظری بنویسید :</h5>
             <form>
-                <input type="text" v-model="name" placeholder="نام">
-                <textarea placeholder="نظر" v-model="commented" name="comment" id="comment"></textarea>
+                <textarea placeholder="متن نظر" v-model="commented" name="comment" id="comment"></textarea>
                 <br>
                 <a @click="addComment" class="waves-effect waves-light btn btn-large" id="comment-submit">ثبت نظر</a>
                 <a @click="goToComments(nth)" class="waves-effect waves-light btn btn-large" id="see-comments">مشاهده نظرات</a>
@@ -32,12 +35,11 @@ export default {
         return{
             rating: 0,
             avgRating: 0.5,
-            name: "",
             commented: ""
         }
     },
     methods: {
-        ...mapActions(["fetchPicUrl","addToComment", "clearPicUrl"]),
+        ...mapActions(["fetchPic","addToComment", "clearPic"]),
         setRating: function(rating){
             this.rating = rating
         },
@@ -46,21 +48,20 @@ export default {
         },
         addComment: function(nth){
             let objid = this.nth
-            let objname = this.name;
             let objcomment = this.commented;
-            let obj = {id: objid, name: objname,comment: objcomment}
+            let obj = {id: objid,comment: objcomment}
             this.addToComment(obj);
             this.$router.push(`${nth}/comments`);
         }
     },
     created(){
-        this.fetchPicUrl(this.nth)
+        this.fetchPic(this.nth)
     },
     computed: {
-        ...mapGetters(["picUrl"])
+        ...mapGetters(["picData"]),
     },
     destroyed(){
-        this.clearPicUrl()
+        this.clearPic()
     }
 }
 </script>

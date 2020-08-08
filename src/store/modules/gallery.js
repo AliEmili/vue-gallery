@@ -16,7 +16,7 @@ const actions = {
     async fetchPhotos({ commit }) {
         try {
             const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos?_limit=16"
+                "//localhost:8080/gallery"
             );
             console.log(response.data)
             commit("setPhotos", response.data);

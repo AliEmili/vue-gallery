@@ -16,9 +16,9 @@ const actions = {
     async fetchDeveloper({ commit }) {
         try {
             const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos?_limit=2"
+                "//localhost:8080/about"
             );
-            commit("setDeveloper", response.data);
+            commit("setDeveloper", response.data.developers);
         } catch (err) {
             console.log(err);
         }

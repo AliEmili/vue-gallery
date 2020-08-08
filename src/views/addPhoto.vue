@@ -3,20 +3,61 @@
         <h5>افزودن عکس</h5>
         <form class="card">
             <div class="input-fieldd">
-                <label for="user">نام کاربری</label>
-                <input id="user" type="text">
+                <label for="photoTitle">عنوان</label>
+                <input v-model="title" id="photoTitle" type="text">
+            </div>
+            <div class="input-fieldd">
+                <label for="desText">متن توضیحات</label>
+                <input v-model="info" id="desText" type="text">
             </div>
             <label for="photo">عکس را انتخاب کنید</label>
-            <input id="photo" class="file" type="file">
-            <a class="waves-effect waves-light btn btn-large" id="submitPhoto">ارسال</a>
+            <input ref="inputUpload" @change="uploadImage" accept="image/*" id="photo" class="file" type="file">
+            <div v-if="img" class="img-cont">
+                <img :src="img" alt="pic">
+            </div>
+            <a @click="photoSent" class="waves-effect waves-light btn btn-large" id="submitPhoto">ارسال</a>
         </form>
     </div>
 </template>
 
 
 <script>
+import { mapActions } from 'vuex';
 export default {
-    name: "addPhoto"
+    name: "addPhoto",
+    data(){
+        return {
+            title: "",
+            info: "",
+            img: ""
+        }
+    },
+    methods: {
+        ...mapActions(["addPhotoAction"]),
+        // e dasht input function
+        uploadImage:function(){
+            let image = this.$refs.inputUpload.files[0].name;
+            this.img = image;
+            // const image = e.target.files[0];
+            // const reader = new FileReader();
+            // this.img = image;
+            // reader.readAsDataURL(image);
+            // reader.onload = e => {
+            //     this.img = e.target.result;
+            // }
+        },
+        photoSent: function(){
+            let newTitle = this.title;
+            let newInfo = this.info;
+            let newFile = this.img;
+            let photo = {
+                title: newTitle,
+                imagePath: newFile,
+                info: newInfo
+            }
+            this.addPhotoAction(photo);
+        }
+    }
 }
 </script>
 
@@ -44,5 +85,13 @@ export default {
     }
     label {
         padding: 5px;
+    }
+    .img-cont{
+        width: 200px;
+        margin: 30px auto;
+    }
+    img {
+        width: 100%;
+        height: auto;
     }
 </style>
