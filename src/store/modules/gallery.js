@@ -16,9 +16,9 @@ const actions = {
     async fetchPhotos({ commit }) {
         try {
             const response = await axios.get(
-                "//localhost:8080/gallery"
+                "/gallery"
             );
-            console.log(response.data)
+            console.log("fetchphotos in gallery response : ", response.data);
             commit("setPhotos", response.data);
         } catch (err) {
             console.log(err);

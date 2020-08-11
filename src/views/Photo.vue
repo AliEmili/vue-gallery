@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card">
-            <img :src=picUrl.url alt="pic">
+            <img :src=pathCom(picData.imagePath) alt="pic">
             <h5>تیتر عکس :</h5>
             <p>{{picData.title}}</p>
             <h5>توضیحات :</h5>
@@ -34,34 +34,52 @@ export default {
     data(){
         return{
             rating: 0,
-            avgRating: 0.5,
             commented: ""
         }
     },
     methods: {
-        ...mapActions(["fetchPic","addToComment", "clearPic"]),
-        setRating: function(rating){
-            this.rating = rating
+        ...mapActions(["fetchPic","addToComment", "clearPic","rated", "fetchAvg"]),
+        setRating: function(){
+            if(!localStorage.getItem('user')){
+                this.$router.push("/login");
+            }else{
+                let objid = this.nth;
+                let rateNum = this.rating;
+                let rateobj = {id: objid, rate: rateNum}
+                this.rated(rateobj);
+            }
         },
         goToComments: function(nth){
             this.$router.push(`${nth}/comments`);
         },
-        addComment: function(nth){
-            let objid = this.nth
-            let objcomment = this.commented;
-            let obj = {id: objid,comment: objcomment}
-            this.addToComment(obj);
-            this.$router.push(`${nth}/comments`);
+        addComment: function(){
+            if(!localStorage.getItem('user')){
+                this.$router.push("/login");
+            }else{
+                if(this.commented){
+                    let objid = this.nth
+                    let objcomment = this.commented;
+                    let obj = {id: objid,comment: objcomment}
+                    this.addToComment(obj);
+                    this.$router.push(`${this.nth}/comments`);
+                }
+            }
+        },
+        pathCom: function(url){
+            console.log("photos : url = ",url);
+            url = "http://localhost:8080/"+url;
+            return url
         }
     },
     created(){
-        this.fetchPic(this.nth)
+        this.fetchPic(this.nth);
+        this.fetchAvg(this.nth);
     },
     computed: {
-        ...mapGetters(["picData"]),
+        ...mapGetters(["picData", "avgRating"]),
     },
     destroyed(){
-        this.clearPic()
+        this.clearPic();
     }
 }
 </script>

@@ -1,14 +1,18 @@
 <template>
     <div>
         <div class="cards">
-            <h3>نظرات</h3>
-            <div class="img-div">
-                <img :src=picUrl.url alt="pic">
+            <div class="header-div">
+                <h3>نظرات</h3>
             </div>
-            <ul class="card" v-for="comment in comments" :key="comment.id">
-                <li class="email">{{comment.email}}</li>
-                <li class="comment-text">{{comment.body}}</li>
+            <div class="img-div">
+                <img :src=pathCom(picData.imagePath) alt="pic">
+            </div>
+            <ul class="card" v-for="comment in comments" :key="comment._id">
+                <li class="email">{{comment.byWho}}</li>
+                <li class="comment-text">{{comment.commentText}}</li>
+                <li class="comment-text">متن کامنت</li>
             </ul>
+            <p v-if="lenCom(comments) == 0" class="card">نظری وجود ندارد.</p>
         </div>
     </div>
 </template>
@@ -19,14 +23,22 @@ export default {
     name: "Comment",
     props: ["nth"],
     methods: {
-        ...mapActions(["fetchPicUrl","fetchComments"])
+        ...mapActions(["fetchPic","fetchComments"]),
+        pathCom: function(url){
+            console.log("comment : url = ",url);
+            url = "http://localhost:8080/"+url;
+            return url
+        },
+        lenCom: function(comments){
+            return comments.length;
+        }
     },
     created(){
-        this.fetchPicUrl(this.nth),
+        this.fetchPic(this.nth),
         this.fetchComments(this.nth)
     },
     computed: {
-        ...mapGetters(["picUrl","comments"])
+        ...mapGetters(["picData","comments"])
     }
 }
 </script>
@@ -56,7 +68,13 @@ export default {
     .email {
         font-weight: bolder;
     }
-    li{
+    li, p{
         padding: 20px;
+    }
+    .header-div{
+        text-align: center;
+    }
+    p.card{
+        text-align: center;
     }
 </style>

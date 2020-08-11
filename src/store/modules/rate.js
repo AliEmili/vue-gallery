@@ -1,19 +1,39 @@
 import axios from "axios";
 
 const state = {
-    rate: ""
+    rate: null,
+    avgRating: null
 };
 
 const getters = {
-    user: state => state.rate
+    user: state => state.rate,
+    avgRating: state => state.avgRating
 };
 
 const actions = {
-    async register({ commit }, post) {
+    async rated({ commit }, post) {
         try {
-            const response = await axios.post(`//localhost:8080/gallery/${post.id}/rate`, { rate: post.rate });
-            console.log(response.data);
+            console.log("post in rated : ", post);
+            let userInfo = await localStorage.getItem('user');
+            let userToken = await JSON.parse(userInfo);
+            const response = await axios.post(`/gallery/${post.id}/rate`, { rate: post.rate }, {
+                headers: {
+                    token: userToken
+                }
+            });
+            console.log("rated response", response.data);
             commit('setRate', response.data);
+            const res = await axios.get(`/gallery/${post.id}/rate`);
+            commit('setAvgRate', res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async fetchAvg({ commit }, id) {
+        try {
+            const response = await axios.get(`/gallery/${id}/rate`);
+            console.log("fetchavg response", response.data);
+            commit('setAvgRate', response.data);
         } catch (err) {
             console.log(err);
         }
@@ -21,7 +41,8 @@ const actions = {
 }
 
 const mutations = {
-    setRate: (state, rate) => state.rate = rate
+    setRate: (state, rate) => state.rate = rate,
+    setAvgRate: (state, avgRating) => state.avgRating = avgRating.avgRate
 };
 
 export default {

@@ -9,5 +9,12 @@ Vue.component('star-rating', StarRating);
 new Vue({
     router,
     store,
+    created() {
+        const userString = localStorage.getItem('user');
+        if (userString) {
+            const userData = JSON.parse(userString);
+            this.$store.commit('setLoginUser', userData);
+        }
+    },
     render: h => h(App)
 }).$mount("#app");

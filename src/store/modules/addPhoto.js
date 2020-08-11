@@ -8,19 +8,16 @@ const actions = {
     async addPhotoAction({ commit }, photo) {
         try {
             let userInfo = await localStorage.getItem('user');
-            let userToken = await JSON.parse(userInfo).token;
-            console.log(userToken, photo);
-            const response = await axios.post(
-                'http://127.0.0.1:8080/gallery', {
-                    photo,
-                }, {
-                    headers: {
-                        token: userToken
-                    }
-                }
-            )
-            console.log(response.data);
-            commit('ye', 'yd');
+            let userToken = await JSON.parse(userInfo);
+            console.log("userInfo in addphoto = ", userInfo);
+            console.log("usertoken in addphoto = ", userToken);
+            await axios({
+                method: 'post',
+                data: photo,
+                headers: { 'token': userToken, 'Content-Type': 'multipart/form-data' },
+                url: '/gallery'
+            })
+            console.log(commit);
         } catch (err) {
             console.log(err);
         }

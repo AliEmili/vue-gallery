@@ -5,14 +5,15 @@ const state = {
 };
 
 const getters = {
-    userFields: state => state.user
+    userFields: state => state.user,
+    userError: state => state.error
 };
 
 const actions = {
     async register({ commit }, userFields) {
         try {
-            const response = await axios.post("//localhost:8080/signup", userFields);
-            console.log(response.data);
+            const response = await axios.post("/signup", userFields);
+            console.log("register response", response.data);
             commit('setUser', response.data);
         } catch (err) {
             console.log(err);
@@ -21,7 +22,8 @@ const actions = {
 }
 
 const mutations = {
-    setUser: (state, userData) => state.user = userData
+    setUser: (state, userData) => state.user = userData,
+    setError: (state, error) => state.error = error
 };
 
 export default {

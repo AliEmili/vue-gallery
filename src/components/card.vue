@@ -1,7 +1,7 @@
 <template>
     <div class="photos">
-        <div @click="goToPhotoPage(photo.id)" class="card" v-for="photo in photos" v-bind:key="photo.id">
-            <img :src=photo.imagePath alt="pic">
+        <div @click="goToPhotoPage(photo._id)" class="card" v-for="photo in photos" v-bind:key="photo.id">
+            <img :src=pathCom(photo.imagePath) alt="pic">
         </div>
     </div>
 </template>
@@ -13,7 +13,13 @@ export default {
     methods: {
         ...mapActions(["fetchPhotos"]),
         goToPhotoPage: function(id){
+            console.log("gotophotopage : id =", id)
             this.$router.push(`gallery/${id}`);
+        },
+        pathCom: function(url){
+            console.log("pathcom: url =",url)
+            url = process.env.BACKEND_BASE_URL+url;
+            return url
         }
     },
     computed: {
@@ -21,6 +27,12 @@ export default {
     },
     created(){
         this.fetchPhotos();
+    },
+    mounted(){
+        if(localStorage.getItem('reloadGallery')){
+            localStorage.removeItem('reloadGallery');
+            location.reload();
+        }
     }
 }
 </script>

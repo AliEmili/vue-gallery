@@ -5,20 +5,22 @@ const state = {
 };
 
 const getters = {
-    picData: state => state.picData.imagePath
+    picData: state => state.picData
 }
 
 const mutations = {
-    setPicUrl: (state, picUrl) => state.picData = picUrl,
+    setPic: (state, picData) => state.picData = picData,
     clearPic: (state, picData) => state.picData = picData
 }
 
 const actions = {
     async fetchPic({ commit }, picId) {
         try {
+            console.log("picid in fetchpic :", picId);
             const response = await axios.get(
-                `//localhost:8080/gallery/${picId}`
+                `/gallery/${picId}`
             );
+            console.log("response fetchpic", response.data);
             commit("setPic", response.data);
         } catch (err) {
             console.log(err);
@@ -27,6 +29,7 @@ const actions = {
     async clearPic({ commit }) {
         try {
             const empty = {};
+            console.log("pic cleared");
             commit("clearPic", empty);
         } catch (err) {
             console.log(err);

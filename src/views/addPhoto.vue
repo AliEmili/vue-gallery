@@ -1,21 +1,21 @@
 <template>
     <div>
         <h5>افزودن عکس</h5>
-        <form class="card">
+        <form id="form" @submit.prevent="submit" class="card">
             <div class="input-fieldd">
                 <label for="photoTitle">عنوان</label>
-                <input v-model="title" id="photoTitle" type="text">
+                <input name="title" v-model="title" id="photoTitle" type="text">
             </div>
             <div class="input-fieldd">
                 <label for="desText">متن توضیحات</label>
-                <input v-model="info" id="desText" type="text">
+                <input v-model="info" name="info" id="desText" type="text">
             </div>
             <label for="photo">عکس را انتخاب کنید</label>
-            <input ref="inputUpload" @change="uploadImage" accept="image/*" id="photo" class="file" type="file">
+            <input @input="onSelectFile" ref="inputUpload" accept="image/*" id="photo" class="file" type="file">
             <div v-if="img" class="img-cont">
                 <img :src="img" alt="pic">
             </div>
-            <a @click="photoSent" class="waves-effect waves-light btn btn-large" id="submitPhoto">ارسال</a>
+            <button type="submit" class="waves-effect indigo waves-light btn btn-large" id="submitPhoto">ارسال</button>
         </form>
     </div>
 </template>
@@ -29,33 +29,38 @@ export default {
         return {
             title: "",
             info: "",
-            img: ""
+            img: null
         }
     },
     methods: {
         ...mapActions(["addPhotoAction"]),
-        // e dasht input function
-        uploadImage:function(){
-            let image = this.$refs.inputUpload.files[0].name;
-            this.img = image;
-            // const image = e.target.files[0];
-            // const reader = new FileReader();
-            // this.img = image;
-            // reader.readAsDataURL(image);
-            // reader.onload = e => {
-            //     this.img = e.target.result;
-            // }
-        },
-        photoSent: function(){
-            let newTitle = this.title;
-            let newInfo = this.info;
-            let newFile = this.img;
-            let photo = {
-                title: newTitle,
-                imagePath: newFile,
-                info: newInfo
+        submit: function() {
+            if(!localStorage.getItem('user')){
+                this.$router.push("/login");
             }
-            this.addPhotoAction(photo);
+            else if(!!this.$refs.inputUpload.files[0] && !!this.info && this.title){
+                let image = this.$refs.inputUpload.files[0];
+                let formData = new FormData();
+                formData.append('info', this.info);
+                formData.append('imagePath', image);
+                formData.append('title', this.title);
+                this.addPhotoAction(formData);
+                localStorage.setItem('reloadGallery','1');
+                this.$router.push("/gallery");
+            }else {
+                location.reload();
+            }
+        },
+        onSelectFile: function(){
+            const input = this.$refs.inputUpload;
+            const files = input.files;
+            if( files && files[0]){
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.img = e.target.result;
+                }
+                reader.readAsDataURL(files[0]);
+            }
         }
     }
 }
@@ -93,5 +98,6 @@ export default {
     img {
         width: 100%;
         height: auto;
+        border-radius: 10px;
     }
 </style>

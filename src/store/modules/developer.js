@@ -16,9 +16,11 @@ const actions = {
     async fetchDeveloper({ commit }) {
         try {
             const response = await axios.get(
-                "//localhost:8080/about"
+                "/about"
             );
-            commit("setDeveloper", response.data.developers);
+            console.log("fetchdeveloper response :",
+                response.data);
+            commit("setDeveloper", response.data);
         } catch (err) {
             console.log(err);
         }

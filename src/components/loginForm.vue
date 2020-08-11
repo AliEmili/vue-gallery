@@ -24,13 +24,19 @@ export default {
     methods: {
         ...mapActions(['login']),
         loginClicked: function(){
-            let usrobj = this.username;
-            let passobj = this.password;
-            let userobj = {
-                username:usrobj,
-                password:passobj
+            if(this.username && this.password){
+                let usrobj = this.username;
+                let passobj = this.password;
+                let userobj = {
+                    username:usrobj,
+                    password:passobj
+                }
+                this.login(userobj);
+                this.$router.push("/");
             }
-            this.login(userobj);
+            else{ 
+                location.reload();
+            }
         }
     }
 }

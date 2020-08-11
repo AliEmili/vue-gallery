@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const state = {
-    userLogin: {}
+    userLogin: null
 };
 
 const getters = {
-    userLogin: state => state.userLogin
+    userLogin: state => state.userLogin,
+    loggedIn: state => !!state.userLogin
 }
 
 const mutations = {
@@ -16,8 +17,6 @@ const mutations = {
     clearUser: (state, empty) => {
         state.userLogin = empty;
         localStorage.removeItem('user');
-        state.user = empty;
-        location.reload();
     }
 }
 
@@ -25,17 +24,20 @@ const actions = {
     async login({ commit }, userInput) {
         try {
             const response = await axios.post(
-                '//localhost:8080/login', userInput
+                '/login', userInput
             );
-            console.log(response.data.token);
-            commit("setLoginUser", response.data);
+            console.log("login response", response.data);
+            if (response.data.token) {
+                commit("setLoginUser", response.data.token);
+            }
         } catch (err) {
             console.log(err);
         }
     },
     async signOut({ commit }) {
         try {
-            commit("clearUser", {});
+            console.log("sign out log");
+            commit("clearUser", null);
         } catch (err) {
             console.log(err);
         }

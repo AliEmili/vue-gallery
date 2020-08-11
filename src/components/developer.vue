@@ -1,9 +1,9 @@
 <template>    
     <div class="developer">
         <div class="cards" v-for="developer in developers" :key="developer.id">
-            <img :src=developer.url alt="pic">
-            <h5>{{developer.title | substring}}</h5>
-            <p>{{developer.title | repeat}}</p>
+            <img :src=pathCom(developer.developerImg) alt="pic">
+            <h5>{{developer.title}}</h5>
+            <p>{{developer.info}}</p>
         </div>
     </div>
 </template>
@@ -14,21 +14,18 @@ import {mapGetters, mapActions} from "vuex";
 export default {
     name: "developer",
     methods: {
-        ...mapActions(["fetchDeveloper"])
+        ...mapActions(["fetchDeveloper"]),
+        pathCom: function(url){
+            console.log("developer: url = ",url)
+            url = process.env.BACKEND_BASE_URL+url;
+            return url
+        }
     },
     computed: {
         ...mapGetters(["developers"])
     },
     created(){
         this.fetchDeveloper();
-    },
-    filters: {
-        substring(val){
-            return val.substring(0,3);
-        },
-        repeat(val){
-            return val.repeat(10);
-        }
     }
 }
 </script>
@@ -49,11 +46,13 @@ export default {
         border-radius: 50%;
         margin: 5px;
     }
-    h5, p{
+    p{
         margin-right: 20px;
         margin-bottom: 20px;
     }
-
+    h5 {
+        margin-right: 20px !important;
+    }
     @media (max-width:800px){
         .cards {
             text-align: center;
