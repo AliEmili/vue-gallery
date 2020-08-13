@@ -18,7 +18,9 @@ export default {
         },
         pathCom: function(url){
             console.log("pathcom: url =",url)
-            url = process.env.BACKEND_BASE_URL+url;
+            if(process.env.BACKEND_BASE_URL){
+                url = process.env.BACKEND_BASE_URL+url;
+            }
             return url
         }
     },

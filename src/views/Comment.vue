@@ -26,7 +26,9 @@ export default {
         ...mapActions(["fetchPic","fetchComments"]),
         pathCom: function(url){
             console.log("comment : url = ",url);
-            url = "http://localhost:8080/"+url;
+            if(process.env.BACKEND_BASE_URL){
+                url = process.env.BACKEND_BASE_URL+url;
+            }
             return url
         },
         lenCom: function(comments){
