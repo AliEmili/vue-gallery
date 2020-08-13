@@ -14,7 +14,7 @@ const actions = {
     async fetchHome({ commit }) {
         try {
             const response = await axios.get(
-                "/"
+                "/server/"
             );
             console.log("fetchhome response data : ");
             commit("setHome", response.data[0]);

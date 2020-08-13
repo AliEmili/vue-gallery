@@ -16,14 +16,14 @@ const actions = {
             console.log("post in rated : ", post);
             let userInfo = await localStorage.getItem('user');
             let userToken = await JSON.parse(userInfo);
-            const response = await axios.post(`/gallery/${post.id}/rate`, { rate: post.rate }, {
+            const response = await axios.post(`/server/gallery/${post.id}/rate`, { rate: post.rate }, {
                 headers: {
                     token: userToken
                 }
             });
             console.log("rated response", response.data);
             commit('setRate', response.data);
-            const res = await axios.get(`/gallery/${post.id}/rate`);
+            const res = await axios.get(`/server/gallery/${post.id}/rate`);
             commit('setAvgRate', res.data);
         } catch (err) {
             console.log(err);
@@ -31,7 +31,7 @@ const actions = {
     },
     async fetchAvg({ commit }, id) {
         try {
-            const response = await axios.get(`/gallery/${id}/rate`);
+            const response = await axios.get(`/server/gallery/${id}/rate`);
             console.log("fetchavg response", response.data);
             commit('setAvgRate', response.data);
         } catch (err) {

@@ -12,7 +12,7 @@ const getters = {
 const actions = {
     async register({ commit }, userFields) {
         try {
-            const response = await axios.post("/signup", userFields);
+            const response = await axios.post("/server/signup", userFields);
             console.log("register response", response.data);
             commit('setUser', response.data);
         } catch (err) {

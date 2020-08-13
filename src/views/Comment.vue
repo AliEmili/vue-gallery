@@ -10,7 +10,7 @@
             <ul class="card" v-for="comment in comments" :key="comment._id">
                 <li class="email">{{comment.byWho}}</li>
                 <li class="comment-text">{{comment.commentText}}</li>
-                <li class="comment-text">متن کامنت</li>
+                <!-- <li class="comment-text">متن کامنت</li> -->
             </ul>
             <p v-if="lenCom(comments) == 0" class="card">نظری وجود ندارد.</p>
         </div>
@@ -28,6 +28,9 @@ export default {
             console.log("comment : url = ",url);
             if(process.env.BACKEND_BASE_URL){
                 url = process.env.BACKEND_BASE_URL+url;
+            }
+            else if(url && url[0] !== '/'){
+                url = '/' + url;
             }
             return url
         },

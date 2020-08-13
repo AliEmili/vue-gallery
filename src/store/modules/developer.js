@@ -16,7 +16,7 @@ const actions = {
     async fetchDeveloper({ commit }) {
         try {
             const response = await axios.get(
-                "/about"
+                "/server/about"
             );
             console.log("fetchdeveloper response :",
                 response.data);

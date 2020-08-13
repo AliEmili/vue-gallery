@@ -21,6 +21,10 @@ export default {
             if(process.env.BACKEND_BASE_URL){
                 url = process.env.BACKEND_BASE_URL+url;
             }
+            else if(url && url[0] !== '/'){
+                url = '/' + url;
+            }
+
             return url
         }
     },
@@ -29,12 +33,6 @@ export default {
     },
     created(){
         this.fetchPhotos();
-    },
-    mounted(){
-        if(localStorage.getItem('reloadGallery')){
-            localStorage.removeItem('reloadGallery');
-            location.reload();
-        }
     }
 }
 </script>

@@ -13,7 +13,7 @@ const actions = {
         try {
             console.log("id in fetchcomment = ", id)
             const response = await axios.get(
-                `/gallery/${id}/comments`
+                `/server/gallery/${id}/comments`
             );
             console.log("response fetchcomment: ", response.data);
             commit("setComments", response.data);
@@ -21,15 +21,17 @@ const actions = {
             console.log(err);
         }
     },
-    async addToComment({ commit }, payload) {
+    async addToComment({ commit, dispatch }, payload) {
         try {
             let userInfo = await localStorage.getItem('user');
-            let userToken = await JSON.parse(userInfo).token;
+            let userToken = await JSON.parse(userInfo);
             console.log("userInfo in addtocomment = ", userInfo);
             console.log("usertoken in addtocomment = ", userToken);
             console.log("payload in addtocomment: payload");
-            const response = await axios.post(`/gallery/${payload.id}/coments`, { commentText: payload.comment }, { headers: { token: userToken } })
+            const response = await axios.post(`/server/gallery/${payload.id}/coments`, { commentText: payload.comment }, { headers: { token: userToken } })
             commit('newComment', response.data);
+            // this.fetchComments(payload.id);
+            dispatch('fetchComments', payload.id)
         } catch (err) {
             console.log(err);
         }

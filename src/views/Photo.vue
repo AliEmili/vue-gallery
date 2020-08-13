@@ -70,6 +70,10 @@ export default {
             if(process.env.BACKEND_BASE_URL){
                 url = process.env.BACKEND_BASE_URL+url;
             }
+            else if(url && url[0] !== '/'){
+                url = '/' + url;
+            }
+            
             return url
         }
     },

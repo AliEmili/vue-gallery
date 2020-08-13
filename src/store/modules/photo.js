@@ -18,7 +18,7 @@ const actions = {
         try {
             console.log("picid in fetchpic :", picId);
             const response = await axios.get(
-                `/gallery/${picId}`
+                `/server/gallery/${picId}`
             );
             console.log("response fetchpic", response.data);
             commit("setPic", response.data);

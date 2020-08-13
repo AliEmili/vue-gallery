@@ -24,7 +24,7 @@ const actions = {
     async login({ commit }, userInput) {
         try {
             const response = await axios.post(
-                '/login', userInput
+                '/server/login', userInput
             );
             console.log("login response", response.data);
             if (response.data.token) {

@@ -45,7 +45,7 @@ export default {
                 formData.append('imagePath', image);
                 formData.append('title', this.title);
                 this.addPhotoAction(formData);
-                localStorage.setItem('reloadGallery','1');
+                // localStorage.setItem('reloadGallery','1');
                 this.$router.push("/gallery");
             }else {
                 location.reload();
